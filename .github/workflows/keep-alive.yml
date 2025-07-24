@@ -12,5 +12,5 @@ jobs:
     steps:
       - name: Wake server
         run: |
-          curl --fail --silent https://your-app-domain.onrender.com/status \
+          curl --fail --silent https://roblox-ai-npc-3ikk.onrender.com/status \
             || echo "Ping failed at $(date)"
