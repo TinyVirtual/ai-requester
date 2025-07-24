@@ -36,7 +36,6 @@ const generationconfig = {
 }
 
 async function run(prompt, history, instruction) {
-      console.log(prompt+"????????  \nINST:"+instruction+ ". short responses, at the most 150 characters")
   for (const key of apiKeys) {
     try {
       let genAi = new GoogleGenerativeAI(key);
