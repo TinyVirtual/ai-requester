@@ -4,6 +4,11 @@ const bp = require("body-parser");
 const fetch = require("node-fetch").default;
 const fs = require("fs");
 
+let serverStatus = {
+  up: true,
+  quotaReached: false,
+  lastCheck: new Date().toISOString()
+};
 const PORT = 8080;
 
 globalThis.fetch = fetch;
@@ -41,8 +46,14 @@ async function run(prompt, history, instruction){
         const result = await chatSession.sendMessage(prompt)
         return {Response: true, Text: result.response.text()}
     } catch (e) {
-        console.error(e)
-        return {Response: false};
+      console.error(e);
+    
+      if (e.message && e.message.includes("429")) {
+        serverStatus.quotaReached = true;
+        serverStatus.lastCheck = new Date().toISOString();
+      }
+    
+      return { Response: false };
     }
 }
 
@@ -58,4 +69,11 @@ app.post("/",async (req, res) => {
 
 app.listen(PORT,() => console.log("Working"))
 
+app.get("/status", (req, res) => {
+  res.status(200).json({
+    status: "Online",
+    quotaReached: serverStatus.quotaReached,
+    lastChecked: serverStatus.lastCheck
+  });
+});
 //*/
