@@ -21,7 +21,7 @@ app.use(bp.json());
 const { GoogleGenerativeAI, aihc, aihbt } = require("@google/generative-ai");
 // GoogleGenerativeAI, HarmCategory,  HarmBlockThreshold
 
-const apikey = process.env.API_KEY
+const apikey = process.env.API_KEY1
 const genAi = new GoogleGenerativeAI(apikey)
 
 const generationconfig = {
