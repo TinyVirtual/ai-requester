@@ -1,7 +1,7 @@
 
 const app = require("express")();
 const bp = require("body-parser");
-const fetch = require("node-fetch");
+const fetch = require("node-fetch").default;
 const fs = require("fs");
 
 const PORT = 8080;
