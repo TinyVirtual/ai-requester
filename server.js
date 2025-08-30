@@ -3,6 +3,7 @@ const app = require("express")();
 const bp = require("body-parser");
 const fetch = require("node-fetch").default;
 const fs = require("fs");
+const cors = require('cors');
 
 let serverStatus = {
   up: true,
@@ -17,6 +18,7 @@ globalThis.Headers = fetch.Headers;
 globalThis.Request = fetch.Request;
 globalThis.Response = fetch.Response;
 
+app.use(cors());
 app.use(bp.json());
 
 const { GoogleGenerativeAI, aihc, aihbt } = require("@google/generative-ai");
@@ -80,3 +82,4 @@ app.get("/status", (req, res) => {
   });
 });
 //*/
+
